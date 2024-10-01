@@ -1,6 +1,6 @@
 package com.example.recapProject1October.repository;
 
-import com.example.recapProject1October.dto.KanbanTask;
+import com.example.recapProject1October.model.KanbanTask;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
