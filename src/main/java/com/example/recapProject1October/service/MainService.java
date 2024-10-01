@@ -28,4 +28,10 @@ public class MainService {
     public void addTask (KanbanTask task) {
         taskRepository.save(task);
     }
+
+    public void updateTask (KanbanTask task) {
+        KanbanTask taskToUpdate = taskRepository.findById(task.id()).get();
+        taskRepository.delete(taskToUpdate);
+        taskRepository.save(task);
+    }
 }
