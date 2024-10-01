@@ -35,4 +35,9 @@ public class MainController {
     public void updateTask(@PathVariable String id, @RequestBody KanbanTask task){
         mainService.updateTask(task);
     }
+
+    @DeleteMapping("/todo/{id}")
+    public void deleteTask(@PathVariable String id){
+        mainService.deleteTask(id);
+    }
 }

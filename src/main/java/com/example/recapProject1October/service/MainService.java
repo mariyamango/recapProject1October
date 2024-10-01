@@ -34,4 +34,9 @@ public class MainService {
         taskRepository.delete(taskToUpdate);
         taskRepository.save(task);
     }
+
+    public void deleteTask (String id) {
+        KanbanTask taskToDelete = taskRepository.findById(id).get();
+        taskRepository.delete(taskToDelete);
+    }
 }
