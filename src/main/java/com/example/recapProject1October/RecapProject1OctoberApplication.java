@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RecapProject1OctoberApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(RecapProject1OctoberApplication.class, args);
 	}
 
