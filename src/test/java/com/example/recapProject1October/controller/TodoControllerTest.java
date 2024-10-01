@@ -1,8 +1,8 @@
 package com.example.recapProject1October.controller;
 
-import com.example.recapProject1October.dto.KanbanTask;
-import com.example.recapProject1October.dto.TaskStatus;
-import com.example.recapProject1October.service.MainService;
+import com.example.recapProject1October.model.KanbanTask;
+import com.example.recapProject1October.model.TaskStatus;
+import com.example.recapProject1October.service.TodoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -18,20 +18,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-@WebMvcTest(MainController.class)
-class MainControllerTest {
+@WebMvcTest(TodoController.class)
+class TodoControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private MainService mainService;
+    private TodoService todoService;
 
     @Test
     void getAllTasks_shouldReturnTasksList() throws Exception {
         KanbanTask task1 = new KanbanTask("1", "Task 1", TaskStatus.OPEN);
         KanbanTask task2 = new KanbanTask("2", "Task 2", TaskStatus.OPEN);
-        when(mainService.getAllTasks()).thenReturn(Arrays.asList(task1, task2));
+        when(todoService.getAllTasks()).thenReturn(Arrays.asList(task1, task2));
         mockMvc.perform(get("/api/todo"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -42,7 +42,7 @@ class MainControllerTest {
     @Test
     void getTaskById_shouldReturnTask() throws Exception {
         KanbanTask task1 = new KanbanTask("1", "Task 1", TaskStatus.OPEN);
-        when(mainService.getTaskById("1")).thenReturn(task1);
+        when(todoService.getTaskById("1")).thenReturn(task1);
         mockMvc.perform(get("/api/todo/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value("1"))
@@ -57,7 +57,7 @@ class MainControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(taskJson))
                 .andExpect(status().isOk());
-        verify(mainService, times(1)).addTask(task);
+        verify(todoService, times(1)).addTask(task);
     }
 
     @Test
@@ -68,13 +68,13 @@ class MainControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(taskJson))
                         .andExpect(status().isOk());
-        verify(mainService, times(1)).updateTask("1", updateTask);
+        verify(todoService, times(1)).updateTask("1", updateTask);
     }
 
     @Test
     void deleteTask_shouldRemoveTask() throws Exception {
         mockMvc.perform(delete("/api/todo/1"))
                 .andExpect(status().isOk());
-        verify(mainService, times(1)).deleteTask("1");
+        verify(todoService, times(1)).deleteTask("1");
     }
 }

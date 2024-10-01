@@ -1,4 +1,4 @@
-package com.example.recapProject1October.dto;
+package com.example.recapProject1October.model;
 
 public enum TaskStatus {
     OPEN,
