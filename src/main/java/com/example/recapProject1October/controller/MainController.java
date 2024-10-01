@@ -2,7 +2,6 @@ package com.example.recapProject1October.controller;
 
 import com.example.recapProject1October.dto.KanbanTask;
 import com.example.recapProject1October.service.MainService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +20,10 @@ public class MainController {
     @GetMapping("/todo")
     public List<KanbanTask> getAllTasks(){
         return mainService.getAllTasks();
+    }
+    @GetMapping("/todo/{id}")
+    public KanbanTask getById(@PathVariable String id){
+        return mainService.getTaskById(id);
     }
 
     @PostMapping("/todo")
