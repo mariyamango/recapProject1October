@@ -30,4 +30,9 @@ public class MainController {
     public void addTask(@RequestBody KanbanTask kanbanTask){
         mainService.addTask(kanbanTask);
     }
+
+    @PutMapping("/todo/{id}")
+    public void updateTask(@PathVariable String id, @RequestBody KanbanTask task){
+        mainService.updateTask(task);
+    }
 }
