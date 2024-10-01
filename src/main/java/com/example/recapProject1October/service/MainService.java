@@ -21,6 +21,10 @@ public class MainService {
         return taskRepository.findAll();
     }
 
+    public KanbanTask getTaskById(String id) {
+        return taskRepository.findById(id).orElse(null);
+    }
+
     public void addTask (KanbanTask task) {
         taskRepository.save(task);
     }
