@@ -33,7 +33,7 @@ public class MainController {
 
     @PutMapping("/todo/{id}")
     public void updateTask(@PathVariable String id, @RequestBody KanbanTask task){
-        mainService.updateTask(task);
+        mainService.updateTask(id, task);
     }
 
     @DeleteMapping("/todo/{id}")
